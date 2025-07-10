@@ -1,0 +1,24 @@
+{
+  "name": "fanar-mcp-server",
+  "version": "1.0.1",
+  "description": "Node.js MCP server for Fanar tools.",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
+  },
+  "bin": {
+    "fanar-mcp-server": "dist/index.js"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+} 
