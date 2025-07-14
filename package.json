@@ -1,25 +1,39 @@
 {
-  "name": "fanar-mcp-server",
-  "version": "1.0.2",
-  "description": "Fanar MCP tools for Node.js",
+  "name": "@danijeun/fanar-mcp-server",
+  "version": "1.1.0",
+  "description": "MCP server for Fanar API tools: Islamic RAG, image generation, and translation.",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist", "README.md"],
-  "scripts": {
-    "build": "tsc"
-  },
   "type": "module",
+  "bin": {
+    "fanar-mcp-tools": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "fanar",
+    "islamic-rag",
+    "image-generation",
+    "translation",
+    "model-context-protocol"
+  ],
+  "author": "Daniel Jeun",
+  "license": "None",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@types/jimp": "^0.2.1",
     "axios": "^1.6.8",
-    "dotenv": "^16.4.5",
-    "express": "^4.18.2",
-    "jimp": "^0.22.10",
-    "openai": "^4.20.0"
+    "jimp": "^1.6.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/jimp": "^0.16.4"
-  },
-  "keywords": ["fanar", "mcp", "tools", "ai"],
-  "author": "Daniel Jeun"
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.4"
+  }
 }

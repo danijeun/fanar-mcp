@@ -1,58 +1,72 @@
 # Fanar MCP Tools
 
-A modular Node.js package providing Fanar MCP tools for image generation, Islamic RAG, thinking mode, image understanding, and translation. Use as a library in any Node.js project.
-
-## Features
-- Generate images from prompts
-- Islamic RAG (Retrieval-Augmented Generation)
-- Thinking mode (multi-step reasoning)
-- Image understanding (with base64 input)
-- Translation (multi-language)
+A Model Context Protocol (MCP) server for Fanar API tools: Islamic RAG, image generation, and translation. Publishable as an npm package and usable as a CLI tool or MCP server.
 
 ## Installation
+
 ```sh
-npm install fanar-mcp
+npm install -g @danijeun/fanar-mcp-server
 ```
 
-## Usage (Library)
-```typescript
-import { generateImage, islamicRag, thinkingMode, imageUnderstanding, translate } from 'fanar-mcp';
-import dotenv from 'dotenv';
-dotenv.config();
+Or use with npx:
 
-const apiKey = process.env.FANAR_API_KEY!;
+```sh
+npx @danijeun/fanar-mcp-server
+```
 
-async function main() {
-  const img = await generateImage('A mosque at sunset', apiKey);
-  console.log(img);
+## Environment Variable
 
-  const rag = await islamicRag('What is zakat?', apiKey);
-  console.log(rag);
+Set your Fanar API key:
 
-  // ...and so on for other tools
+```sh
+export FANAR_API_KEY=your_api_key_here
+```
+
+## Usage (CLI)
+
+You can run the MCP server directly:
+
+```sh
+@danijeun/fanar-mcp-server
+```
+
+Or via npx:
+
+```sh
+npx @danijeun/fanar-mcp-server
+```
+
+## Usage (MCP Client)
+
+Configure your MCP client to use this server. Example config:
+
+```json
+{
+  "mcpServers": {
+    "fanar_mcp": {
+      "command": "npx",
+      "args": ["@danijeun/fanar-mcp-server"],
+      "env": {
+        "FANAR_API_KEY": "your api key here"
+      }
+    }
+  }
 }
-main();
 ```
 
-## API
+## Tools
 
-### `generateImage(prompt: string, apiKey: string): Promise<string>`
-- Generate an image from a prompt. Returns base64 image string.
+### fanar_rag
+- **Input:** `{ messages: [{ role: string, content: string }], model?: string }`
+- **Output:** `{ content: [{ type: "text", text: string }], references?: any[] }`
 
-### `islamicRag(prompt: string, apiKey: string): Promise<{ content: string, references: any[] }>`
-- Islamic RAG (Retrieval-Augmented Generation).
+### fanar_image_gen
+- **Input:** `{ prompt: string }`
+- **Output:** `{ content: [{ type: "image", image: string }] }` (base64)
 
-### `thinkingMode(prompt: string, apiKey: string): Promise<string>`
-- Multi-step reasoning/thinking mode.
-
-### `imageUnderstanding(prompt: string, image_b64: string, apiKey: string): Promise<string>`
-- Image understanding with base64-encoded image input.
-
-### `translate(text: string, langpair: string, apiKey: string, preprocessing?: string): Promise<any>`
-- Translate text between languages.
-
-## Environment Variables
-- `FANAR_API_KEY` (required): Your Fanar API key.
+### fanar_translate
+- **Input:** `{ text: string, langpair: string, preprocessing?: string }`
+- **Output:** `{ content: [{ type: "text", text: string }] }`
 
 ## License
-MIT
+None
