@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-// Removed resizeImageIfNeeded and all resizing logic
-
 export async function fanarRag(
   messages: { role: string; content: string }[],
   model: string
@@ -48,7 +46,7 @@ export async function fanarImageGen(
   );
   const image_b64 = response.data.data?.[0]?.b64_json;
   if (!image_b64) throw new Error('No image returned');
-  // Return image as received, no resizing
+
   return image_b64;
 }
 
